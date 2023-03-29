@@ -1,5 +1,19 @@
 pipeline {
     agent any
+    plugins {
+    // id("com.moowork.node") version "1.3.1"
+    id("com.github.node-gradle.node") version "2.2.0"
+    }
+    node {
+        download = true
+        version = "12.13.1"
+        npmVersion = "6.9.0"
+        yarnVersion = "1.17.3"
+        nodeModulesDir = project.file("ui")
+        workDir = project.file("${project.buildDir}/nodejs")
+        npmWorkDir = project.file("${project.buildDir}/npm")
+        yarnWorkDir = project.file("${project.buildDir}/yarn")
+    }
     environment {
         //be sure to replace "willbla" with your own Docker Hub username
         DOCKER_IMAGE_NAME = "ksilvar/train-schedule"
